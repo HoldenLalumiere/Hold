@@ -1,5 +1,7 @@
 import java.io.*;
-import java.nio.Buffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class Hold {
     /**
@@ -56,7 +58,7 @@ public class Hold {
 
             //Set variables used in reading
             boolean instance = false; //used to check if a class instance has started or not
-
+            HashMap<String, Object> fields = new HashMap<>();
 
             // Read the file
             String line = reader.readLine();
@@ -72,33 +74,53 @@ public class Hold {
                 System.exit(0);
             }
 
+            // Go through the whole file
             while (line != null){
                 System.out.println(line);
 
-                // If this line is the start of Class instance ({)
-                if (line.equals("{") && instance != true){
-                    instance = true;
-                    continue;
+                //TODO maybe add in elses for these ifs that are error checks
+
+                if (instance != true){
+                    // If this line is the start of Class instance ({)
+                    if (line.equals("{")){
+                        instance = true;
+                        continue;
+                    }
                 }
+                else{
+                    // This line is the last line of the instance, make the class instance
+                    if (line.equals("}")){
+                        instance = false;
+                        // Make the class now
+                        continue;
+                    }
 
-                // The next line should be either the first field
-                if (line.equals("}") && instance == true){
-                    instance = false;
-                    // Make the class now
-                    continue;
+                    // The next line should be a field
+                    else{
+                        ArrayList<String> lines = new ArrayList<>(Arrays.asList(line.split("\"|:")));
+                        for (int i = 0; i < lines.size(); i++) {
+                            // Remove all blank entries
+                            if (lines.get(i).equals("")) {
+                                lines.remove(i);
+                                i--;
+                            }
+                        }
+                        //TODO remove this print
+                        for (int i = 0; i < lines.size(); i++){
+                            System.out.println("\t" + lines.get(i));
+                        }
+
+                        //TODO unhard code again
+                        if (lines.get(0).equals("name")){
+                            fields.put(lines.get(0), lines.get(1));
+                            // If there are no more fields (no ,)
+                            if (lines.size() == 2){
+                                // TODO, next symbol should be }
+
+                            }
+                        }
+                    }
                 }
-
-
-
-                String[] lines = line.split("\\s+|\"");
-                for (int i = 0; i < lines.length; i++) {
-                    System.out.println("\t" + lines[i]);
-                }
-
-
-
-
-
                 line = reader.readLine();
             }
             reader.close();

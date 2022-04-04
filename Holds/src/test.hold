@@ -1,13 +1,13 @@
 TestClass
 {
-"name": "bob",
-"weight": 200,
+"name":"bob",
+"weight":200,
 "colors":
 [
 "white",
 "black"
 ],
-"b": true,
+"b":true,
 },
 {
 
