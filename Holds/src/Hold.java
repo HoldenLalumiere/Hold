@@ -14,27 +14,23 @@ public class Hold {
     public static void hold(String[] args){
         // Check if there is exactly 1 argument
         if (args.length < 1){
-            System.err.println("Not enough arguments, try giving a .hold file");
-            System.exit(-1);
+            printErr("Not enough arguments, try giving a .hold file");
         }
         else if (args.length > 1){
-            System.err.println("Too many arguments, try giving one .hold file");
-            System.exit(-1);
+            printErr("Too many arguments, try giving one .hold file");
         }
 
-        System.out.println(args[0]);
+        // Check if it is a . file
         String file = args[0];
         String[] splitFile = file.split("\\.");
         if (splitFile.length != 2) {
-            System.err.println("File is not a .hold, try giving a .hold file");
-            System.exit(-1);
+            printErr("File is not a .hold, try giving a .hold file");
         }
 
+        // Check if it is a .hold file
         String holdCheck = splitFile[1];
-        System.out.println(holdCheck);
         if (!holdCheck.equals("hold")){
-            System.err.println("File is not a .hold, try giving a .hold file");
-            System.exit(-1);
+            printErr("File is not a .hold, try giving a .hold file");
         }
 
 
@@ -61,6 +57,11 @@ public class Hold {
 
 
 
+    }
+
+    private static void printErr(String error){
+        System.err.println(error);
+        System.exit(-1);
     }
 
 }
