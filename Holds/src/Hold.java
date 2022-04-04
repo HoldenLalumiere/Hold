@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.Buffer;
+
 public class Hold {
     /**
      * Run the program
@@ -33,30 +39,36 @@ public class Hold {
             printErr("File is not a .hold, try giving a .hold file");
         }
 
+        //TODO check if there should be more error checks
+
+        // Read in the file
+        readHold(file);
+    }
+
+    /**
+     * Read in the .hold file
+     *
+     * @param file the .hold to read
+     */
+    private static void readHold(String file) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            // Read the file
+            String line = reader.readLine();
+            while (line != null){
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            printErr("FileNotFoundException, File does not exist");
+        } catch (IOException e) {
+            printErr("IOException");
+        }
     }
 
     /**
