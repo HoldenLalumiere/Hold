@@ -59,6 +59,11 @@ public class Hold {
 
     }
 
+    /**
+     * Prints and error to err
+     *
+     * @param error the string of what went wrong to print
+     */
     private static void printErr(String error){
         System.err.println(error);
         System.exit(-1);
