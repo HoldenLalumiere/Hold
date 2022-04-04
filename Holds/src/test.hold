@@ -1,6 +1,14 @@
 {
 "TestClass",
-""
+"name": "bob",
+"weight": 200,
+"colors": [
+"white",
+"black"
+],
+"b": true,
+
+    String[] colors;
 },
 {
 

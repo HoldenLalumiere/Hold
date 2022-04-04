@@ -57,7 +57,7 @@ public class Hold {
             // Read the file
             String line = reader.readLine();
             while (line != null){
-
+                System.out.println(line);
 
 
 
