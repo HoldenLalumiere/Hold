@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.Buffer;
 
 public class Hold {
@@ -51,13 +48,54 @@ public class Hold {
      * @param file the .hold to read
      */
     private static void readHold(String file) {
+        File f = new File(file);
+        System.out.println(f.getAbsolutePath());
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            // TODO figure out why it doesn't find the file
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\h\\Documents\\GitHub\\Hold\\Holds\\src\\" + file));
+
+            //Set variables used in reading
+            boolean instance = false; //used to check if a class instance has started or not
+
 
             // Read the file
             String line = reader.readLine();
+            // Check first line to see if it is the class name (Class)
+            //TODO unhard code this
+            if (!line.equals("TestClass")){
+                printErr("Incorrect file format");
+            }
+            // If the next line is null then there is no class instance in the file
+            line = reader.readLine();
+            if (line == null){
+                //TODO maybe add something here
+                System.exit(0);
+            }
+
             while (line != null){
                 System.out.println(line);
+
+                // If this line is the start of Class instance ({)
+                if (line.equals("{") && instance != true){
+                    instance = true;
+                    continue;
+                }
+
+                // The next line should be either the first field
+                if (line.equals("}") && instance == true){
+                    instance = false;
+                    // Make the class now
+                    continue;
+                }
+
+
+
+                String[] lines = line.split("\\s+|\"");
+                for (int i = 0; i < lines.length; i++) {
+                    System.out.println("\t" + lines[i]);
+                }
+
+
 
 
 

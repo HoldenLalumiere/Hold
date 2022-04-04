@@ -1,14 +1,13 @@
+TestClass
 {
-"TestClass",
 "name": "bob",
 "weight": 200,
-"colors": [
+"colors":
+[
 "white",
 "black"
 ],
 "b": true,
-
-    String[] colors;
 },
 {
 
